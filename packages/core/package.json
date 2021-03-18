@@ -1,5 +1,5 @@
 {
-  "name": "core",
+  "name": "@fri-cli/core",
   "version": "0.0.1",
   "description": "fri-cli core",
   "keywords": [
