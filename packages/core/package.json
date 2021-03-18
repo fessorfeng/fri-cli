@@ -1,0 +1,23 @@
+{
+  "name": "core",
+  "version": "0.0.1",
+  "description": "fri-cli core",
+  "keywords": [
+    "fir-cli",
+    "core"
+  ],
+  "author": "fessorfeng <fessor@139.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/core.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}
