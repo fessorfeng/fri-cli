@@ -1,7 +1,7 @@
 {
   "name": "@fri-cli/utils",
   "version": "0.0.3",
-  "description": "> TODO: description",
+  "description": "fri-cli utils",
   "author": "fessorfeng <fessor@139.com>",
   "homepage": "",
   "license": "ISC",

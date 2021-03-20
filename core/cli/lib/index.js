@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = core;
+module.exports = cli;
 
-function core() {
+function cli() {
     // TODO
 }
