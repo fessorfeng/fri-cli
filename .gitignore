@@ -3,4 +3,5 @@
 yarn.lock
 
 /node_modules
+lerna-debug.log
 
