@@ -1,7 +1,9 @@
 .idea
 .vscode
 yarn.lock
+package-lock.json
 
 /node_modules
 lerna-debug.log
-
+core/**/node_modules
+utils/**/node_modules

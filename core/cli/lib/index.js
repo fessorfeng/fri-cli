@@ -1,6 +1,16 @@
 'use strict';
 
-module.exports = cli;
+const log = require("npmlog");
 
-function cli() {
+const pkInfo = require("../package.json");
+
+function cli () {
+  checkPackageVersion();
 }
+
+function checkPackageVersion () {
+  log.info(pkInfo.version);
+}
+
+
+module.exports = cli;
