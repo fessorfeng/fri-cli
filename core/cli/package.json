@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "fri-cli core",
   "keywords": [
     "fir-cli",
@@ -28,8 +28,8 @@
     "access": "public"
   },
   "dependencies": {
+    "@fri-cli/log": "file:../../utils/log",
     "import-local": "^3.0.2",
-    "npmlog": "^4.1.2",
-    "@fri-cli/log": "file:../../utils/log"
+    "npmlog": "^4.1.2"
   }
 }
