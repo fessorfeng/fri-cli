@@ -1,0 +1,33 @@
+{
+  "name": "@fri-cli/log",
+  "version": "0.0.1",
+  "description": "fri-cli log",
+  "keywords": [
+    "fri-cli",
+    "log"
+  ],
+  "author": "fessor <352475718@qq.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/fessor/fri-cli.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "npmlog": "^4.1.2"
+  }
+}

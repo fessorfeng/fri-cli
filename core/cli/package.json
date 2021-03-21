@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "import-local": "^3.0.2",
-    "npmlog": "^4.1.2"
+    "npmlog": "^4.1.2",
+    "@fri-cli/log": "file:../../utils/log"
   }
 }
