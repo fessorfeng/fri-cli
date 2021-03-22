@@ -28,8 +28,14 @@
     "access": "public"
   },
   "dependencies": {
+    "@fri-cli/get-npm-info": "file:../../utils/get-npm-info",
     "@fri-cli/log": "file:../../utils/log",
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
     "import-local": "^3.0.2",
-    "npmlog": "^4.1.2"
+    "npmlog": "^4.1.2",
+    "path-exists": "^4.0.0",
+    "root-check": "^1.0.0",
+    "user-home": "^2.0.0"
   }
 }
