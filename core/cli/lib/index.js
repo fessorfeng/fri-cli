@@ -6,9 +6,11 @@ const userHome = require("user-home");
 const pathExists = require("path-exists").sync;
 const log = require("@fri-cli/log");
 const { getNpmSemverVersions } = require("@fri-cli/get-npm-info");
-const pkg = require("../package.json");
+// const pkg = require(path.resolve(__dirname, "../package.json"));
+const fs = require('fs');
+// fessorwrite
+const pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json")));
 const CONST = require("./constant");
-
 
 function cli() {
   try {
@@ -45,7 +47,6 @@ function checkNodeVersion() {
       colors.red(`${pkg.name} 需要安装${lowestVersion}版本及以上的Node.js`)
     );
   }
-  // console.log(require('minimist')(process.argv.slice(2)));
 }
 
 function checkRoot() {
@@ -68,14 +69,12 @@ function checkInputArgs() {
 function checkEnv() {
   const dotenv = require('dotenv');
   const dotenvPath = path.resolve(process.cwd(), '.env');
-  // console.log(dotenvPath);
   let config;
   if (pathExists(dotenvPath)) {
     config = dotenv.config({
       path: dotenvPath
     }).parsed;
   }
-  // log.info('环境变量', config);
 }
 
 async function chekckGlobalUpdate() {
