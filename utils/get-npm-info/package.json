@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/get-npm-info",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "fri-cli get-npm-info",
   "keywords": [
     "fri-cli",
