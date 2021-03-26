@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/core",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "fri-cli core",
   "keywords": [
     "fir-cli",
@@ -30,9 +30,9 @@
     "access": "public"
   },
   "dependencies": {
+    "@fri-cli/exec": "file:../exec",
     "@fri-cli/get-npm-info": "file:../../utils/get-npm-info",
     "@fri-cli/log": "file:../../utils/log",
-    "@fri-cli/exec": "file:../exec",
     "colors": "^1.4.0",
     "commander": "^7.2.0",
     "dotenv": "^8.2.0",
