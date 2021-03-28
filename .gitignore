@@ -6,3 +6,4 @@ yarn.lock
 lerna-debug.log
 core/**/node_modules
 utils/**/node_modules
+models/**/node_modules

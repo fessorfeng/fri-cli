@@ -28,6 +28,10 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@fri-cli/package": "file:../../models/package"
+    "@fri-cli/package": "file:../../models/package",
+    "@fri-cli/utils": "file:../../utils/utils",
+    "path-exists": "^4.0.0",
+    "pkg-dir": "^5.0.0",
+    "user-home": "^2.0.0"
   }
 }

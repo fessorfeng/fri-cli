@@ -26,5 +26,10 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@fri-cli/utils": "file:../../utils/utils",
+    "path-exists": "^4.0.0",
+    "pkg-dir": "^5.0.0"
   }
 }
