@@ -38,8 +38,16 @@ async function getNpmSemverVersions(npmName, baseVersion, isOriginalRegistry = f
   const arr = versions.filter(v => semver.satisfies(v, `>${baseVersion}`));
   return arr.length ? arr : null;
 }
+
+// 获取NPM包最新版本
+async function getNpmLatestVersion(npmName, isOriginalRegistry = false) {
+  const versions = await getNpmVersions(npmName, isOriginalRegistry);
+  return !versions ? null : versions[0];
+}
 module.exports = {
   getNpmInfo,
   getNpmVersions,
-  getNpmSemverVersions
+  getNpmSemverVersions,
+  getNpmLatestVersion,
+  getRegistryUrl
 };

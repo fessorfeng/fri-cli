@@ -9,13 +9,14 @@ const Package = require('@fri-cli/package');
 const {formatPath} = require('@fri-cli/utils');
 
 const cmdMap = {
-  init: '@fri-cli/core',
+  // init: '@fri-cli/core',
+  init: '@imooc-cli/init',
 };
 
-function exec () {
+async function exec () {
   const args = arguments;
   const cmd = args[args.length - 1];
-  const targetPath = process.env.targetPath || '';
+  let targetPath = process.env.targetPath || '';
   const cmdName = cmd.name();
   const npmName = getNpmNameByPath(targetPath) ||
     cmdMap[cmdName];
@@ -27,6 +28,7 @@ function exec () {
   }
   let pk;
   if (targetPath) {
+    console.log(1);
     pk = new Package({
       storeDir,
       npmName,
@@ -34,21 +36,28 @@ function exec () {
       targetPath
     });
   } else {
+    console.log(2);
     // 准备package实例化的参数
-    storeDir = path.resolve(userHome, process.env.CLI_CACHE, 'dependencies');
+    targetPath = path.resolve(userHome, process.env.CLI_CACHE, 'dependencies');
+    storeDir = path.resolve(targetPath, 'node_modules');
+
     pk = new Package({
       storeDir,
       npmName,
       npmVersion,
       targetPath
     });
-      // 使用pk检查是否本地缓存
-        // 无，安装
-        // 有，检查更新
-
+    // 使用pk检查是否本地缓存
+    if (!pk.exists()) {
+      // 无，安装
+      await pk.install();
+    } else {
+      // 有，检查更新
+      await pk.update();
+    } 
   }
-  console.log(storeDir);
-  // console.log(npmName, formatPath(targetPath));
+  const rootFile = pk.getNpmRootFile();
+  console.log(storeDir,targetPath,1111, rootFile);
 }
 
 function getNpmNameByPath (pathPk) {

@@ -28,7 +28,10 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
+    "@fri-cli/get-npm-info": "file:../../utils/get-npm-info",
     "@fri-cli/utils": "file:../../utils/utils",
+    "mkdirp": "^1.0.4",
+    "npminstall": "^4.11.0",
     "path-exists": "^4.0.0",
     "pkg-dir": "^5.0.0"
   }
