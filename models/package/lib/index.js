@@ -20,7 +20,7 @@ class Package {
   get cacheFilePath() {
     return path.resolve(this.storeDir, `_${this.cacheFilePathPrefix}@${this.npmVersion}@${this.npmName}`);
   }
-
+  // 准备
   async prepare() {
     if (this.npmVersion === 'latest') {
       const ver = await getNpmLatestVersion(this.npmName);
