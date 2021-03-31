@@ -1,16 +1,18 @@
 'use strict';
 
 const path = require('path');
+const {spawn} = require('child_process');
 const pathExists = require("path-exists").sync;
 const pkgDir = require('pkg-dir').sync;
 const userHome = require('user-home');
  
 const Package = require('@fri-cli/package');
 const {formatPath} = require('@fri-cli/utils');
+const log = require('@fri-cli/log');
 
 const cmdMap = {
-  // init: '@fri-cli/core',
-  init: '@imooc-cli/init',
+  init: '@fri-cli/core',
+  // init: '@imooc-cli/init',
 };
 
 async function exec () {
@@ -28,7 +30,6 @@ async function exec () {
   }
   let pk;
   if (targetPath) {
-    console.log(1);
     pk = new Package({
       storeDir,
       npmName,
@@ -36,7 +37,6 @@ async function exec () {
       targetPath
     });
   } else {
-    console.log(2);
     // 准备package实例化的参数
     targetPath = path.resolve(userHome, process.env.CLI_CACHE, 'dependencies');
     storeDir = path.resolve(targetPath, 'node_modules');
@@ -57,7 +57,44 @@ async function exec () {
     } 
   }
   const rootFile = pk.getNpmRootFile();
-  console.log(storeDir,targetPath,1111, rootFile);
+  if (rootFile) {
+    try {
+      const args = Array.from(arguments);
+      let cmdObj = args[args.length - 1];
+      let o = Object.assign({});
+      Object.keys(cmdObj).forEach(key => {
+        if (key !== 'parent' && !key.startsWith('_') && cmdObj.hasOwnProperty(key)) {
+          o[key] = cmdObj[key];
+        }
+      });
+      args[args.length - 1] = o;
+      // require(rootFile).apply(null, args);
+      log.verbose(rootFile);
+      const code = `require('${rootFile}').call(null, ${JSON.stringify(args)})`;
+      log.verbose(code);
+      const child = spawn('node', ['-e', code], {
+        cwd: process.cwd(),
+        stdio: 'inherit',
+      });
+      // child.stdout.on('data', (data) => {
+      //   console.log(`stdout: ${data}`);
+      // });
+      
+      // child.stderr.on('data', (data) => {
+      //   console.error(`stderr: ${data}`);
+      // });
+      
+      child.on('close', (code) => {
+        console.log(`子进程退出，退出码 ${code}`);
+      });
+      child.on('exit', (code) => {
+        console.log(`exit ${code}`);
+      });
+      
+    } catch (error) {
+      log.error(error.message);
+    }
+  }
 }
 
 function getNpmNameByPath (pathPk) {

@@ -1,10 +1,10 @@
 {
-  "name": "@fri-cli/exec",
+  "name": "@fri-cli/init",
   "version": "0.1.2",
-  "description": "fri-cli exec",
+  "description": "fri-cli init",
   "keywords": [
     "fri-cli",
-    "exec"
+    "init"
   ],
   "author": "fessor <352475718@qq.com>",
   "homepage": "",
@@ -28,11 +28,6 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@fri-cli/package": "file:../../models/package",
-    "@fri-cli/utils": "file:../../utils/utils",
-    "@fri-cli/log": "file:../../utils/log",
-    "path-exists": "^4.0.0",
-    "pkg-dir": "^5.0.0",
-    "user-home": "^2.0.0"
+    "@fri-cli/command": "file:../../models/command"
   }
 }

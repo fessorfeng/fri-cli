@@ -2,12 +2,12 @@
 
 const path = require('path');
 
-function formatPath(p) {
+function formatPath (p) {
   if (p && typeof p === 'string') {
     if (path.sep === '/') {
       return p;
     } else {
-      return p.replace(/\\/g, path.sep);
+      return p.replace(/\\/g, '/');
     }
   }
   return p;

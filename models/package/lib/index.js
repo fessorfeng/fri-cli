@@ -64,7 +64,7 @@ class Package {
   }
 
   _getNpmRootFile (pathPk) {
-    console.log(pathPk, pathExists(pathPk));
+    // console.log(pathPk, pathExists(pathPk));
     if (!pathPk || !pathExists(pathPk)) return '';
   
     const rootPath = pkgDir(pathPk);
