@@ -34,6 +34,7 @@ function registerCommand() {
   program
     .command("init [project-name]")
     .description("project init")
+    .option('-f, --force', '是否强制初始化项目')
     .action(exec);
 
   program.on("option:debug", function () {
@@ -69,8 +70,8 @@ function registerCommand() {
 async function prepare() {
   // 检查cli版本号
   checkPackageVersion();
-  // 检查Node版本号
-  checkNodeVersion();
+  // 检查Node版本号 放到 initCommand完成
+  // checkNodeVersion();
   // 检查是否root启动 防止root创建 以后因为权限不能修改
   checkRoot();
   // 检查是否用户主目录
@@ -87,17 +88,7 @@ function checkPackageVersion() {
   log.info("version", pkg.version);
 }
 
-function checkNodeVersion() {
-  const semver = require("semver");
-  const currentVersion = process.version;
-  const lowestVersion = CONST.NODE_LOWEST_VERSION;
-  // 如果当前版本较低，那么给用户一个提示
-  if (!semver.gte(currentVersion, lowestVersion)) {
-    throw new Error(
-      colors.red(`${pkg.name} 需要安装${lowestVersion}版本及以上的Node.js`)
-    );
-  }
-}
+
 
 function checkRoot() {
   const rootCheck = require("root-check");
@@ -129,6 +120,7 @@ function checkEnv() {
 }
 
 async function chekckGlobalUpdate() {
+  log.info(pkg.version);
   const versions = await getNpmSemverVersions(pkg.name, pkg.version);
   if (versions && versions.length) {
     log.warn(

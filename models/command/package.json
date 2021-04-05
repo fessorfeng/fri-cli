@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "@fri-cli/log": "file:../../utils/log",
-    "clone-deep": "^4.0.1"
+    "clone-deep": "^4.0.1",
+    "colors": "^1.4.0",
+    "semver": "^7.3.5"
   }
 }

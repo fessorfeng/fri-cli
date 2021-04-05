@@ -28,6 +28,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@fri-cli/command": "file:../../models/command"
+    "@fri-cli/command": "file:../../models/command",
+    "@fri-cli/log": "file:../../utils/log",
+    "fs-extra": "^9.1.0",
+    "inquirer": "^8.0.0"
   }
 }

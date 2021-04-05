@@ -70,7 +70,7 @@ async function exec () {
       args[args.length - 1] = o;
       // require(rootFile).apply(null, args);
       log.verbose(rootFile);
-      const code = `require('${rootFile}').call(null, ${JSON.stringify(args)})`;
+      const code = `require('${rootFile}').apply(null, ${JSON.stringify(args)})`;
       log.verbose(code);
       const child = spawn('node', ['-e', code], {
         cwd: process.cwd(),
