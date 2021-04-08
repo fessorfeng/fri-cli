@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/init",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "fri-cli init",
   "keywords": [
     "fri-cli",
@@ -29,8 +29,8 @@
   },
   "dependencies": {
     "@fri-cli/command": "file:../../models/command",
-    "@fri-cli/package": "file:../../models/package",
     "@fri-cli/log": "file:../../utils/log",
+    "@fri-cli/package": "file:../../models/package",
     "@fri-cli/request": "file:../../utils/request",
     "fs-extra": "^9.1.0",
     "inquirer": "^8.0.0",

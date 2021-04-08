@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/mongo",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "fri-cli mongo class",
   "keywords": [
     "fri-cli",
