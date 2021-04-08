@@ -9,6 +9,8 @@ const Command = require("@fri-cli/command");
 const Package = require("@fri-cli/package");
 const log = require("@fri-cli/log");
 const request = require("@fri-cli/request");
+const { cliSpinner, sleep } = require("@fri-cli/utils");
+
 
 const INIT_TYPE_PROJECT = 'project';
 const INIT_TYPE_COMPONENT = 'component';
@@ -195,13 +197,18 @@ class initCommand extends Command {
       npmVersion: tpl.version,
       targetPath
     });
+    let spinner;
     if (!await pk.exists()) {
+      spinner = cliSpinner('模板安装中...');
       // 无，安装
       await pk.install();
     } else {
+      spinner = cliSpinner('模板更新中...');
       // 有，检查更新
       await pk.update();
-    } 
+    }
+    await sleep(1000);
+    spinner.stop(true);
   }
 }
 
