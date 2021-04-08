@@ -48,7 +48,7 @@ async function exec () {
       targetPath
     });
     // 使用pk检查是否本地缓存
-    if (!pk.exists()) {
+    if (!await pk.exists()) {
       // 无，安装
       await pk.install();
     } else {
@@ -69,9 +69,9 @@ async function exec () {
       });
       args[args.length - 1] = o;
       // require(rootFile).apply(null, args);
-      log.verbose(rootFile);
+      // log.verbose(rootFile);
       const code = `require('${rootFile}').apply(null, ${JSON.stringify(args)})`;
-      log.verbose(code);
+      // log.verbose(code);
       const child = spawn('node', ['-e', code], {
         cwd: process.cwd(),
         stdio: 'inherit',

@@ -1,10 +1,10 @@
 {
-  "name": "@fri-cli/init",
+  "name": "@fri-cli/mongo",
   "version": "0.1.4",
-  "description": "fri-cli init",
+  "description": "fri-cli mongo class",
   "keywords": [
     "fri-cli",
-    "init"
+    "mongo"
   ],
   "author": "fessor <352475718@qq.com>",
   "homepage": "",
@@ -28,12 +28,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@fri-cli/command": "file:../../models/command",
-    "@fri-cli/package": "file:../../models/package",
-    "@fri-cli/log": "file:../../utils/log",
-    "@fri-cli/request": "file:../../utils/request",
-    "fs-extra": "^9.1.0",
-    "inquirer": "^8.0.0",
-    "user-home": "^2.0.0"
+    "@fri-cli/log": "file:../log",
+    "mongodb": "^3.6.6"
   }
 }
