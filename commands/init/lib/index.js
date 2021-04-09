@@ -32,6 +32,7 @@ class initCommand extends Command {
     try {
       const projectInfo = await this.prepare();
       // log.verbose("projectInfo", projectInfo);
+      if (!projectInfo || !projectInfo.selectedTpl) return;
       this.projectInfo = projectInfo;
       await this.downloadTpl();
     } catch (err) {
