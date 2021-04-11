@@ -199,17 +199,28 @@ class initCommand extends Command {
       targetPath
     });
     let spinner;
-    if (!await pk.exists()) {
-      spinner = cliSpinner('模板安装中...');
-      // 无，安装
-      await pk.install();
-    } else {
-      spinner = cliSpinner('模板更新中...');
-      // 有，检查更新
-      await pk.update();
+    let error = null;
+    try {
+      if (!await pk.exists()) {
+        spinner = cliSpinner('模板安装中...');
+        // 无，安装
+        await pk.install();
+      } else {
+        spinner = cliSpinner('模板更新中...');
+        // 有，检查更新
+        await pk.update();
+      }
+    } catch (err) {
+      // 有问题 有空检查一下一定要这样设置吗
+      log.debug();
+      error = err;
+    } finally{
+      await sleep(1000);
+      spinner.stop(true);
+      if (error) {
+        log.error(error.message);
+      }
     }
-    await sleep(1000);
-    spinner.stop(true);
   }
 }
 

@@ -5,7 +5,7 @@ const pathExists = require("path-exists").sync;
 const npminstall = require('npminstall');
 const mkdirp = require('mkdirp').sync;
 const { formatPath } = require('@fri-cli/utils');
-const { getNpmLatestVersion, getRegistryUrl } = require('@fri-cli/get-npm-info');
+const { getNpmLatestVersion, getRegistryUrl, getNpmVersions } = require('@fri-cli/get-npm-info');
 
 class Package {
 
@@ -35,6 +35,10 @@ class Package {
 
   async install() {
     await this.prepare();
+    const versions = await getNpmVersions(this.npmName);
+    if (!versions.includes(this.npmVersion)) {
+      throw new Error(`${this.npmName}不存在安装版本${this.npmVersion}`);
+    }
     await this.installSpecVersion(this.npmVersion);
   }
 

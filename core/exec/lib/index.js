@@ -85,10 +85,10 @@ async function exec () {
       // });
       
       child.on('close', (code) => {
-        console.log(`子进程退出，退出码 ${code}`);
+        log.verbose('close code', `子进程退出，退出码 ${code}`);
       });
       child.on('exit', (code) => {
-        console.log(`exit ${code}`);
+        log.verbose('exit code', `exit ${code}`);
       });
       
     } catch (error) {
