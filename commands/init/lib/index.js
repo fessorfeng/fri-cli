@@ -5,6 +5,7 @@ const path = require("path");
 const fsExtra = require("fs-extra");
 const inquirer = require("inquirer");
 const userHome = require("user-home");
+const kebabCase = require("kebab-case");
 const Command = require("@fri-cli/command");
 const Package = require("@fri-cli/package");
 const log = require("@fri-cli/log");
@@ -14,6 +15,8 @@ const { cliSpinner, sleep } = require("@fri-cli/utils");
 
 const INIT_TYPE_PROJECT = 'project';
 const INIT_TYPE_COMPONENT = 'component';
+const TPL_TYPE_NORMAL = 'normal';
+const TPL_TYPE_CUSTOM  = 'custom';
 
 class initCommand extends Command {
   constructor(args) {
@@ -31,10 +34,11 @@ class initCommand extends Command {
   async exec() {
     try {
       const projectInfo = await this.prepare();
-      // log.verbose("projectInfo", projectInfo);
+      log.verbose("projectInfo", projectInfo);
       if (!projectInfo || !projectInfo.selectedTpl) return;
       this.projectInfo = projectInfo;
       await this.downloadTpl();
+      await this.installTpl();
     } catch (err) {
       log.error(err.message);
     }
@@ -108,7 +112,7 @@ class initCommand extends Command {
       questions.push({
         type: "input",
         name: "projectName",
-        message: "请输入项目名称",
+        message: "请输入名称",
         default: "",
         validate: function (input) {
           var done = this.async();
@@ -157,6 +161,7 @@ class initCommand extends Command {
     // 输入版本
     const info = await inquirer.prompt(questions);
     const { type } = info;
+    const initTitle = type === INIT_TYPE_PROJECT ? '项目' : '组件';
     const choices = this.getChoice(this.template, type);
     this.validTpls(choices);
     // log.verbose('type', type);
@@ -164,17 +169,38 @@ class initCommand extends Command {
     const { selectedTpl } = await inquirer.prompt([
       {
         type: 'list',
-        name: 'selectedTpl',
-        message: '请选择模板',
+        name: 'selectedTpl', 
+        message: `请选择${initTitle}模板`,
         choices,
       }
     ]);
+    const {description} = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'description', 
+        message: `请输入${initTitle}描述`,
+        default: "",
+        validate: function (input) {
+          var done = this.async();
+          setTimeout(function () {
+            if (!input) {
+              done("不能为空，请重新输入！");
+              return;
+            }
+            done(null, true);
+          }, 3000);
+        },
+      }
+    ]);
+    let projectName = info.projectName || this.projectName;
+    info.projectName = kebabCase(projectName).replace(/^-/, '');
     
-    return { ...info, selectedTpl };
+    log.verbose('projectName', projectName);
+    return { ...info, description, selectedTpl };
   }
 
   getChoice(tpls, type) {
-    return tpls.filter(v => v.type === type).map(tpl => ({
+    return tpls.filter(v => v.initType === type).map(tpl => ({
       name: tpl.name,
       value: tpl.npmName
     }));
@@ -189,6 +215,7 @@ class initCommand extends Command {
     const targetPath = path.resolve(userHome, process.env.CLI_CACHE ||'.fri_cli_cache', 'templates');
     const storeDir = path.resolve(targetPath, 'node_modules');
     const tpl = this.template.filter(v => v.npmName === this.projectInfo.selectedTpl)[0];
+    this.selectedTpl = tpl;
     // log.verbose('tpl', tpl);
     // log.verbose('targetPath', targetPath);
     // log.verbose('storeDir', storeDir);
@@ -220,6 +247,42 @@ class initCommand extends Command {
       if (error) {
         log.error(error.message);
       }
+    }
+  }
+  async installNormalTpl () {
+    log.info('normal');
+        // 3.1 标准模版安装
+    // 3.1.1 下载的模版缓存目录，复制文件的目录，确保存在
+    // 3.1.2 复制文件过去
+    // 3.1.3 glob匹配文件ejs 渲染保存
+    // 3.1.4 执行安装命令
+    // 3.1.5 执行运行命令
+  }
+  async installCustomTpl () {
+    log.info('custom');
+    // 3.2 自定义安装
+    // 获取包rootfile 执行文件
+    // 安装逻辑写在rootfile
+    // 3.2.1 下载的模版缓存目录，复制文件的目录，确保存在
+    // 3.2.2 复制文件过去
+    // 3.2.3 glob匹配文件ejs 渲染保存
+  }
+  async installTpl () {
+    // 1.存起选择的模版信息
+    log.verbose('selectedTpl', this.selectedTpl);
+    const selectedTpl = this.selectedTpl;
+    // 2.判断模版是否自定义模版
+    // 3.根据模版是否自定义安装
+    switch (selectedTpl.type) {
+      case TPL_TYPE_NORMAL:
+        await this.installNormalTpl();
+        break;
+      case TPL_TYPE_CUSTOM:
+        await this.installCustomTpl();
+        break;
+      default:
+        throw new Error('未定义的模板类型');
+        break;
     }
   }
 }

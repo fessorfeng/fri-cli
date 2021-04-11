@@ -24,7 +24,7 @@ class Package {
   async prepare() {
     if (this.npmVersion === 'latest') {
       const ver = await getNpmLatestVersion(this.npmName);
-      if (ver) this.npmVersion = ver;
+      if (ver) this.npmVersion = ver   ;
     }
   }
   
