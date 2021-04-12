@@ -21,7 +21,7 @@ function cliSpinner(text = 'processing..', sign = '|/-\\') {
   return spinner;
 }
 
-function sleep(time){
+function sleep(time = 1000){
   return new Promise(resolve => setTimeout(resolve, time));
 }
 

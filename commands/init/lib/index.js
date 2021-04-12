@@ -227,9 +227,12 @@ class initCommand extends Command {
     });
     let spinner;
     let error = null;
+    spinner = cliSpinner('模板信息获取中，请耐心等候...');
+    const isExist = await pk.exists();
     try {
-      if (!await pk.exists()) {
-        spinner = cliSpinner('模板安装中...');
+      spinner.stop(true);
+      if (!isExist) {
+        spinner = cliSpinner('模板下载中...');
         // 无，安装
         await pk.install();
       } else {
@@ -239,21 +242,45 @@ class initCommand extends Command {
       }
     } catch (err) {
       // 有问题 有空检查一下一定要这样设置吗
-      log.debug();
+      // log.debug();
       error = err;
     } finally{
       await sleep(1000);
       spinner.stop(true);
+      // 缓存信息 安装使用到
+      this.tplNpmPk = pk;
       if (error) {
-        log.error(error.message);
+        // log.error(error.message);
+        throw new error;
       }
+      const msg = `模板${isExist ? '更新' : '下载'}成功！`;
+      log.success(msg);
     }
   }
   async installNormalTpl () {
-    log.info('normal');
-        // 3.1 标准模版安装
-    // 3.1.1 下载的模版缓存目录，复制文件的目录，确保存在
-    // 3.1.2 复制文件过去
+    // log.info('normal');
+    // 3.1 标准模版安装
+    const targetPath = process.cwd();
+    const template = path.resolve(this.tplNpmPk.cacheFilePath, 'template');
+    console.log(targetPath, template);
+    const spinner = cliSpinner('模板安装中...');
+    let err;
+    try {
+      // 3.1.1 下载的模版缓存目录，复制文件的目录，确保存在
+      fsExtra.ensureDirSync(targetPath);
+      fsExtra.ensureDirSync(template);
+      // 3.1.2 复制文件过去
+      fsExtra.copySync(template, targetPath);
+    } catch (error) {
+      err = error;
+    } finally {
+      sleep();
+      spinner.stop(true);
+      if (err) throw err;
+      log.success('模板安装成功！');
+    }
+    
+    
     // 3.1.3 glob匹配文件ejs 渲染保存
     // 3.1.4 执行安装命令
     // 3.1.5 执行运行命令
