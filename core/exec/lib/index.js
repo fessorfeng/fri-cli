@@ -7,7 +7,7 @@ const pkgDir = require('pkg-dir').sync;
 const userHome = require('user-home');
  
 const Package = require('@fri-cli/package');
-const {formatPath} = require('@fri-cli/utils');
+const {execPromise} = require('@fri-cli/utils');
 const log = require('@fri-cli/log');
 
 const cmdMap = {
@@ -72,10 +72,16 @@ async function exec () {
       // log.verbose(rootFile);
       const code = `require('${rootFile}').apply(null, ${JSON.stringify(args)})`;
       // log.verbose(code);
-      const child = spawn('node', ['-e', code], {
+      const res = await execPromise('node', ['-e', code], {
         cwd: process.cwd(),
         stdio: 'inherit',
       });
+      log.verbose('res:', res);
+      if (res) throw new Error('执行不成功！');
+      // const child = spawn('node', ['-e', code], {
+      //   cwd: process.cwd(),
+      //   stdio: 'inherit',
+      // });
       // child.stdout.on('data', (data) => {
       //   console.log(`stdout: ${data}`);
       // });
@@ -84,12 +90,12 @@ async function exec () {
       //   console.error(`stderr: ${data}`);
       // });
       
-      child.on('close', (code) => {
-        log.verbose('close code', `子进程退出，退出码 ${code}`);
-      });
-      child.on('exit', (code) => {
-        log.verbose('exit code', `exit ${code}`);
-      });
+      // child.on('close', (code) => {
+      //   log.verbose('close code', `子进程退出，退出码 ${code}`);
+      // });
+      // child.on('exit', (code) => {
+      //   log.verbose('exit code', `exit ${code}`);
+      // });
       
     } catch (error) {
       log.error(error.message);
