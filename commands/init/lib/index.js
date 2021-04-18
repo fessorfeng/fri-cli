@@ -331,7 +331,7 @@ class initCommand extends Command {
     // 3.1.3 glob匹配文件ejs 渲染保存
     const options = {
       cwd: targetPath,
-      ignore: ['**/public/**', '**/node_modules/**'],
+      ignore: ['**/public/**', '**/node_modules/**'].concat(this.selectedTpl.ignore || []),
       nodir: true,
     };
     await this.ejsRender(options);
@@ -368,7 +368,7 @@ class initCommand extends Command {
     // 3.2.3 glob匹配文件ejs 渲染保存
     const targetPath = process.cwd();
     const template = path.resolve(this.tplNpmPk.cacheFilePath, 'template');
-    const args = [targetPath, template, this.projectInfo];
+    const args = [targetPath, template, this.projectInfo, this.selectedTpl.ignore || []];
 
     const code = `require('${rootFile}').apply(null, ${JSON.stringify(args)})`;
     
