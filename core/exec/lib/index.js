@@ -11,8 +11,7 @@ const {execPromise} = require('@fri-cli/utils');
 const log = require('@fri-cli/log');
 
 const cmdMap = {
-  init: '@fri-cli/core',
-  // init: '@imooc-cli/init',
+  init: '@imooc-cli/init',
 };
 
 async function exec () {
@@ -78,25 +77,7 @@ async function exec () {
       });
       log.verbose('res:', res);
       if (res) throw new Error('执行不成功！');
-      // const child = spawn('node', ['-e', code], {
-      //   cwd: process.cwd(),
-      //   stdio: 'inherit',
-      // });
-      // child.stdout.on('data', (data) => {
-      //   console.log(`stdout: ${data}`);
-      // });
-      
-      // child.stderr.on('data', (data) => {
-      //   console.error(`stderr: ${data}`);
-      // });
-      
-      // child.on('close', (code) => {
-      //   log.verbose('close code', `子进程退出，退出码 ${code}`);
-      // });
-      // child.on('exit', (code) => {
-      //   log.verbose('exit code', `exit ${code}`);
-      // });
-      
+     
     } catch (error) {
       log.error(error.message);
     }

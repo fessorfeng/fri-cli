@@ -32,15 +32,6 @@ function exec(command = '', args = [], options = {}) {
   const cmd = win32 ? 'cmd' : command;
   const cmdArgs = win32 ? ['/c'].concat(command, args) : args;
   const child = spawn(cmd, cmdArgs, options);
-  // child.on('close', (code) => {
-  //   console.log('close code', `子进程退出，退出码 ${code}`);
-  // });
-  // child.on('error', (code) => {
-  //   console.log('error code', `子进程退出，退出码 ${code}`);
-  // });
-  // child.on('exit', (code) => {
-  //   console.log('exit code', `exit ${code}`);
-  // });
   return child;
 }
 

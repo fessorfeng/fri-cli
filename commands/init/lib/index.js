@@ -310,7 +310,7 @@ class initCommand extends Command {
     // 3.1 标准模版安装
     const targetPath = process.cwd();
     const template = path.resolve(this.tplNpmPk.cacheFilePath, 'template');
-    console.log(targetPath, template);
+    // console.log(targetPath, template);
     const spinner = cliSpinner('模板安装中...');
     let err;
     try {
@@ -341,7 +341,7 @@ class initCommand extends Command {
     // 3.1.5 执行运行命令
     await this.execCmd(startCommand);
   }
-  checkCmd (cmd) {
+  checkCmd(cmd) {
     const res = ['npm', 'cnpm', 'yarn'].includes(cmd) ? cmd : null;
     if (!res) throw new Error(`命令${[cmd]}不合法！`);
     return res;
@@ -354,18 +354,40 @@ class initCommand extends Command {
       cwd: process.cwd(),
       stdio: 'inherit',
     };
-    console.log(cmd, args, options);
     const res = await execPromise(cmd, args, options);
     if (res) throw new Error(`执行${[cmd].concat(args).join(' ')}不成功！`);
   }
   async installCustomTpl() {
-    log.info('custom');
+    // log.info('custom');
     // 3.2 自定义安装
     // 获取包rootfile 执行文件
+    const rootFile = this.tplNpmPk.getNpmRootFile();
     // 安装逻辑写在rootfile
     // 3.2.1 下载的模版缓存目录，复制文件的目录，确保存在
     // 3.2.2 复制文件过去
     // 3.2.3 glob匹配文件ejs 渲染保存
+    const targetPath = process.cwd();
+    const template = path.resolve(this.tplNpmPk.cacheFilePath, 'template');
+    const args = [targetPath, template, this.projectInfo];
+
+    const code = `require('${rootFile}').apply(null, ${JSON.stringify(args)})`;
+    
+    const spinner = cliSpinner('模板安装中...');
+    let err;
+    try {
+      const res = await execPromise('node', ['-e', code], {
+        cwd: process.cwd(),
+        stdio: 'inherit',
+      });
+      if (res) throw new Error('执行不成功！');
+    } catch (error) {
+      err = error;
+    } finally {
+      sleep();
+      spinner.stop(true);
+      if (err) throw err;
+      log.success('模板安装成功！');
+    }
   }
   async installTpl() {
     // 1.存起选择的模版信息
