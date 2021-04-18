@@ -27,7 +27,11 @@ function sleep(time = 1000) {
 
 function exec(command = '', args = [], options = {}) {
   const { spawn } = require('child_process');
-  const child = spawn(command, args, options);
+  const win32 = process.platform === 'win32';
+
+  const cmd = win32 ? 'cmd' : command;
+  const cmdArgs = win32 ? ['/c'].concat(command, args) : args;
+  const child = spawn(cmd, cmdArgs, options);
   // child.on('close', (code) => {
   //   console.log('close code', `子进程退出，退出码 ${code}`);
   // });
@@ -49,8 +53,6 @@ function execPromise (command = '', args = [], options = {}) {
     child.on('exit', (code) => {
       resolve(code);
     });
-  }).catch(err => {
-    reject(err);
   });
 }
 

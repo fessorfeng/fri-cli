@@ -12,7 +12,8 @@ const Command = require('@fri-cli/command');
 const Package = require('@fri-cli/package');
 const log = require('@fri-cli/log');
 const request = require('@fri-cli/request');
-const { cliSpinner, sleep } = require('@fri-cli/utils');
+const { cliSpinner, sleep, execPromise } = require('@fri-cli/utils');
+const { includes } = require('user-home');
 
 const INIT_TYPE_PROJECT = 'project';
 const INIT_TYPE_COMPONENT = 'component';
@@ -267,14 +268,18 @@ class initCommand extends Command {
     }
   }
 
-  ejsRender (options) {
+  ejsRender(options) {
     return new Promise((resolve1, reject1) => {
       glob('**', options, (er, files) => {
         if (er) reject1(er);
 
-        const { projectName: className, version, description } = this.projectInfo;
+        const {
+          projectName: className,
+          version,
+          description,
+        } = this.projectInfo;
         const data = { className, version, description };
-        
+
         const options = {};
         Promise.all(
           files.map((file) => {
@@ -287,7 +292,6 @@ class initCommand extends Command {
                   if (str) fsExtra.writeFileSync(filename, str);
                   resolve2(str);
                 }
-              
               });
             });
           })
@@ -331,9 +335,28 @@ class initCommand extends Command {
       nodir: true,
     };
     await this.ejsRender(options);
-    
+    const { installCommand, startCommand } = this.selectedTpl;
     // 3.1.4 执行安装命令
+    await this.execCmd(installCommand);
     // 3.1.5 执行运行命令
+    await this.execCmd(startCommand);
+  }
+  checkCmd (cmd) {
+    const res = ['npm', 'cnpm', 'yarn'].includes(cmd) ? cmd : null;
+    if (!res) throw new Error(`命令${[cmd]}不合法！`);
+    return res;
+  }
+  async execCmd(command) {
+    const arr = command.split(' ');
+    const cmd = this.checkCmd(arr[0]);
+    const args = arr.splice(1);
+    const options = {
+      cwd: process.cwd(),
+      stdio: 'inherit',
+    };
+    console.log(cmd, args, options);
+    const res = await execPromise(cmd, args, options);
+    if (res) throw new Error(`执行${[cmd].concat(args).join(' ')}不成功！`);
   }
   async installCustomTpl() {
     log.info('custom');
