@@ -368,8 +368,9 @@ class initCommand extends Command {
     // 3.2.3 glob匹配文件ejs 渲染保存
     const targetPath = process.cwd();
     const template = path.resolve(this.tplNpmPk.cacheFilePath, 'template');
-    const args = [targetPath, template, this.projectInfo, this.selectedTpl.ignore || []];
-
+    const projectInfo = this.projectInfo;
+    const ignore = this.selectedTpl.ignore || [];
+    const args = [{ targetPath, template, projectInfo, ignore }];
     const code = `require('${rootFile}').apply(null, ${JSON.stringify(args)})`;
     
     const spinner = cliSpinner('模板安装中...');
