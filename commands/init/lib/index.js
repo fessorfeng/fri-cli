@@ -261,7 +261,7 @@ class initCommand extends Command {
       this.tplNpmPk = pk;
       if (error) {
         // log.error(error.message);
-        throw new error();
+        throw error;
       }
       const msg = `模板${isExist ? '更新' : '下载'}成功！`;
       log.success(msg);

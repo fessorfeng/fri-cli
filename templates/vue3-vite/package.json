@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/vue3-vite",
-  "version": "0.1.15",
+  "version": "1.0.3",
   "description": "fri-cli vue3 vite",
   "main": "index.js",
   "scripts": {
