@@ -43,7 +43,6 @@ class Package {
   }
 
   async installSpecVersion (version) {
-    // console.log(version, this.storeDir);
     mkdirp(this.storeDir);
     await npminstall({
       root: this.targetPath,
