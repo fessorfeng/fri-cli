@@ -166,7 +166,6 @@ class initCommand extends Command {
     const initTitle = type === INIT_TYPE_PROJECT ? '项目' : '组件';
     const choices = this.getChoice(this.template, type);
     this.validTpls(choices);
-    // log.verbose('type', type);
     // 选取初始化模板
     const { selectedTpl } = await inquirer.prompt([
       {
@@ -226,9 +225,6 @@ class initCommand extends Command {
       (v) => v.npmName === this.projectInfo.selectedTpl
     )[0];
     this.selectedTpl = tpl;
-    // log.verbose('tpl', tpl);
-    // log.verbose('targetPath', targetPath);
-    // log.verbose('storeDir', storeDir);
     const pk = new Package({
       storeDir,
       npmName: tpl.npmName,
