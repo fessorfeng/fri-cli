@@ -124,7 +124,7 @@ class initCommand extends Command {
               return;
             }
             done(null, true);
-          }, 3000);
+          }, 200);
         },
       });
     }
@@ -189,7 +189,7 @@ class initCommand extends Command {
               return;
             }
             done(null, true);
-          }, 3000);
+          }, 200);
         },
       },
     ]);
