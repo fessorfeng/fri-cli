@@ -1,0 +1,29 @@
+{
+  "name": "@fri-cli/vue3-webpack",
+  "version": "0.1.19",
+  "description": "fri-cli vue3 webapck ts ",
+  "keywords": [
+    "vue3",
+    "typescript"
+  ],
+  "author": "fessor <352475718@qq.com>",
+  "homepage": "",
+  "license": "ISC",
+  "directories": {
+    "lib": "template",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/fessor/fri-cli.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}
