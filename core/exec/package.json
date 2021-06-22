@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/exec",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "fri-cli exec",
   "keywords": [
     "fri-cli",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@fri-cli/log": "^0.1.16",
-    "@fri-cli/package": "^0.1.21",
+    "@fri-cli/package": "^0.1.22",
     "@fri-cli/utils": "^0.1.16",
     "path-exists": "^4.0.0",
     "pkg-dir": "^5.0.0",
