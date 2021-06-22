@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/exec",
-  "version": "0.1.22",
+  "version": "0.2.0",
   "description": "fri-cli exec",
   "keywords": [
     "fri-cli",
@@ -28,9 +28,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@fri-cli/log": "^0.1.16",
-    "@fri-cli/package": "^0.1.22",
-    "@fri-cli/utils": "^0.1.16",
+    "@fri-cli/log": "^0.2.0",
+    "@fri-cli/package": "^0.2.0",
+    "@fri-cli/utils": "^0.2.0",
     "path-exists": "^4.0.0",
     "pkg-dir": "^5.0.0",
     "user-home": "^2.0.0"

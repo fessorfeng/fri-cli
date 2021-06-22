@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/package",
-  "version": "0.1.22",
+  "version": "0.2.0",
   "description": "fri-cli Package ",
   "keywords": [
     "fri-cli",
@@ -28,8 +28,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@fri-cli/get-npm-info": "^0.1.22",
-    "@fri-cli/utils": "^0.1.16",
+    "@fri-cli/get-npm-info": "^0.2.0",
+    "@fri-cli/utils": "^0.2.0",
     "mkdirp": "^1.0.4",
     "npminstall": "^4.11.0",
     "path-exists": "^4.0.0",

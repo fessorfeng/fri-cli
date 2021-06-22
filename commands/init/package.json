@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/init",
-  "version": "0.1.22",
+  "version": "0.2.0",
   "description": "fri-cli init",
   "keywords": [
     "fri-cli",
@@ -28,11 +28,11 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@fri-cli/command": "^0.1.16",
-    "@fri-cli/log": "^0.1.16",
-    "@fri-cli/package": "^0.1.22",
-    "@fri-cli/request": "^0.1.16",
-    "@fri-cli/utils": "^0.1.16",
+    "@fri-cli/command": "^0.2.0",
+    "@fri-cli/log": "^0.2.0",
+    "@fri-cli/package": "^0.2.0",
+    "@fri-cli/request": "^0.2.0",
+    "@fri-cli/utils": "^0.2.0",
     "ejs": "^3.1.6",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",

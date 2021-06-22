@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/request",
-  "version": "0.1.16",
+  "version": "0.2.0",
   "description": "fri-cli request",
   "keywords": [
     "fri-cli",
