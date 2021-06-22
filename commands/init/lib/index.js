@@ -97,7 +97,50 @@ class initCommand extends Command {
   }
 
   getTemplates() {
-    return request.get('/tpl/lists');
+    return process.env.TEMPLATE_URL ? request.get('/tpl/lists') : this.localTempData();
+  }
+  localTempData () {
+    const data = [
+      {
+        "id": "606ef804fc6501fd9da012fd",
+        "name": "标准模板",
+        "npmName": "imooc-cli-dev-template-vue2",
+        "version": "1.0.0",
+        "initType": "project",
+        "type": "normal",
+        "installCommand": "npm install --registry=https://registry.npm.taobao.org",
+        "startCommand": "npm run serve"
+      },
+      {
+        "id": "606d29b7a2cb1e70d539309b",
+        "name": "后台管理模板",
+        "npmName": "imooc-cli-dev-template-vue-element-admin",
+        "version": "1.0.0",
+        "initType": "project",
+        "type": "custom"
+      },
+      {
+        "id": "607beda345ba4047c7b338f5",
+        "name": "vue3自定义模板",
+        "npmName": "@fri-cli/vue3-vite",
+        "version": "1.0.3",
+        "initType": "project",
+        "type": "custom",
+        "ignore": ["**/public/**", "**/assets/**"]
+      },
+      {
+        "id": "608fd12a113994192c9fb123",
+        "name": "vue3标准模板",
+        "npmName": "@fri-cli/vue3-webpack",
+        "version": "0.1.22",
+        "initType": "project",
+        "ignore": ["**/public/**", "**/assets/**"],
+        "type": "normal",
+        "installCommand": "npm install --registry=https://registry.npm.taobao.org",
+        "startCommand": "npm run serve"
+      }
+    ];
+    return Promise.resolve(data);
   }
 
   async getProjectInfo() {

@@ -117,6 +117,7 @@ function checkEnv() {
     }).parsed;
     process.env = Object.assign(process.env, config);
   }
+  process.env.CLI_CACHE = process.env.CLI_CACHE || '.fri_cli_cache';
 }
 
 async function chekckGlobalUpdate() {

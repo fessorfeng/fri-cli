@@ -11,7 +11,7 @@ const {execPromise} = require('@fri-cli/utils');
 const log = require('@fri-cli/log');
 
 const cmdMap = {
-  init: '@imooc-cli/init',
+  init: '@fri-cli/init',
 };
 
 async function exec () {
@@ -21,6 +21,7 @@ async function exec () {
   const cmdName = cmd.name();
   const npmName = getNpmNameByPath(targetPath) ||
     cmdMap[cmdName];
+  
   let storeDir = '';
   let npmVersion = 'latest';
   
@@ -37,7 +38,10 @@ async function exec () {
     });
   } else {
     // 准备package实例化的参数
+    log.verbose('test', cmdName, '|' + targetPath + '|', npmName, userHome, process.env.CLI_CACHE);
+    // return;
     targetPath = path.resolve(userHome, process.env.CLI_CACHE, 'dependencies');
+    
     storeDir = path.resolve(targetPath, 'node_modules');
 
     pk = new Package({

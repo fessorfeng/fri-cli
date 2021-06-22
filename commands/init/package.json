@@ -28,11 +28,11 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@fri-cli/command": "^0.2.0",
-    "@fri-cli/log": "^0.2.0",
-    "@fri-cli/package": "^0.2.0",
-    "@fri-cli/request": "^0.2.0",
-    "@fri-cli/utils": "^0.2.0",
+    "@fri-cli/command": "file:../../models/command",
+    "@fri-cli/log": "file:../../utils/log",
+    "@fri-cli/package": "file:../../models/package",
+    "@fri-cli/request": "file:../../utils/request",
+    "@fri-cli/utils": "file:../../utils/utils",
     "ejs": "^3.1.6",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
