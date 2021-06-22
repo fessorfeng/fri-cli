@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/vue3-webpack",
-  "version": "0.1.20",
+  "version": "0.1.22",
   "description": "fri-cli vue3 webapck ts ",
   "keywords": [
     "vue3",
@@ -9,12 +9,8 @@
   "author": "fessor <352475718@qq.com>",
   "homepage": "",
   "license": "ISC",
-  "directories": {
-    "lib": "template",
-    "test": "__tests__"
-  },
   "files": [
-    "lib"
+    "template"
   ],
   "publishConfig": {
     "access": "public"

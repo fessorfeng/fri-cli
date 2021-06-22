@@ -4,7 +4,8 @@
   "description": "fri-cli get-npm-info",
   "keywords": [
     "fri-cli",
-    "get-npm-info"
+    "get-npm-info",
+    "npm"
   ],
   "author": "fessor <352475718@qq.com>",
   "homepage": "",
