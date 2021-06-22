@@ -4,8 +4,7 @@
   "description": "fri-cli get-npm-info",
   "keywords": [
     "fri-cli",
-    "get-npm-info",
-    "npm-info-detail"
+    "get-npm-info"
   ],
   "author": "fessor <352475718@qq.com>",
   "homepage": "",
@@ -33,5 +32,5 @@
     "semver": "^7.3.4",
     "url-join": "^4.0.1"
   },
-  "gitHead": "b4156f04c610888412751334be05b5fa1af5cc75"
+  "gitHead": "bb9fe95b09b0fe12f4c95d3dcdcd28bef31946a4"
 }

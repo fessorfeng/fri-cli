@@ -31,7 +31,7 @@ async function getNpmVersions(npmName, isOriginalRegistry = false) {
   return versions;
 }
 
-// 获取满足的npm具体版本
+// 获取满足的版本
 async function getNpmSemverVersions(npmName, baseVersion, isOriginalRegistry = false) {
   const versions = await getNpmVersions(npmName, isOriginalRegistry);
   if (!versions) return null;

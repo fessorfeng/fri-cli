@@ -25,7 +25,7 @@
     "build": "webpack",
     "dev": "webpack --watch"
   },
-  "gitHead": "b4156f04c610888412751334be05b5fa1af5cc75",
+  "gitHead": "bb9fe95b09b0fe12f4c95d3dcdcd28bef31946a4",
   "publishConfig": {
     "access": "public"
   },
