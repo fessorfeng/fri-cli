@@ -5,7 +5,7 @@
   "keywords": [
     "fri-cli",
     "get-npm-info",
-    "npm"
+    "npm-info-detail"
   ],
   "author": "fessor <352475718@qq.com>",
   "homepage": "",
@@ -32,5 +32,6 @@
     "axios": "^0.21.1",
     "semver": "^7.3.4",
     "url-join": "^4.0.1"
-  }
+  },
+  "gitHead": "b4156f04c610888412751334be05b5fa1af5cc75"
 }

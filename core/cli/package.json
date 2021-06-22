@@ -25,14 +25,14 @@
     "build": "webpack",
     "dev": "webpack --watch"
   },
-  "gitHead": "3a219bbfea53fb76dc435ca5bb49389ccc637065",
+  "gitHead": "b4156f04c610888412751334be05b5fa1af5cc75",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@fri-cli/exec": "file:../exec",
-    "@fri-cli/get-npm-info": "file:../../utils/get-npm-info",
-    "@fri-cli/log": "file:../../utils/log",
+    "@fri-cli/exec": "^0.1.21",
+    "@fri-cli/get-npm-info": "^0.1.21",
+    "@fri-cli/log": "^0.1.16",
     "colors": "^1.4.0",
     "commander": "^7.2.0",
     "dotenv": "^8.2.0",

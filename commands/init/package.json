@@ -28,16 +28,17 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@fri-cli/command": "file:../../models/command",
-    "@fri-cli/log": "file:../../utils/log",
-    "@fri-cli/package": "file:../../models/package",
-    "@fri-cli/request": "file:../../utils/request",
-    "@fri-cli/utils": "file:../../utils/utils",
+    "@fri-cli/command": "^0.1.16",
+    "@fri-cli/log": "^0.1.16",
+    "@fri-cli/package": "^0.1.21",
+    "@fri-cli/request": "^0.1.16",
+    "@fri-cli/utils": "^0.1.16",
     "ejs": "^3.1.6",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "inquirer": "^8.0.0",
     "kebab-case": "^1.0.1",
     "user-home": "^2.0.0"
-  }
+  },
+  "gitHead": "b4156f04c610888412751334be05b5fa1af5cc75"
 }
