@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 const urlJoin = require("url-join");
 const axios = require("axios");
@@ -31,7 +31,7 @@ async function getNpmVersions(npmName, isOriginalRegistry = false) {
   return versions;
 }
 
-// 获取满足条件的NPM版本 测试云服务器lerna
+// 获取满足条件的NPM版本
 async function getNpmSemverVersions(npmName, baseVersion, isOriginalRegistry = false) {
   const versions = await getNpmVersions(npmName, isOriginalRegistry);
   if (!versions) return null;
