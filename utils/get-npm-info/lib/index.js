@@ -31,7 +31,7 @@ async function getNpmVersions(npmName, isOriginalRegistry = false) {
   return versions;
 }
 
-// 获取满足条件的NPM版本
+// 获取满足条件的NPM版本 测试云服务器lerna
 async function getNpmSemverVersions(npmName, baseVersion, isOriginalRegistry = false) {
   const versions = await getNpmVersions(npmName, isOriginalRegistry);
   if (!versions) return null;
