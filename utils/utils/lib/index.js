@@ -47,10 +47,17 @@ function execPromise (command = '', args = [], options = {}) {
   });
 }
 
+const { hasYarn } = require('./aboutYarn');
+const { registries } = require('./registries');
+const shouldUseTaobao = require('./shouldUseTaobao');
+
 module.exports = {
   formatPath,
   cliSpinner,
   sleep,
   exec,
-  execPromise
+  execPromise,
+  hasYarn,
+  registries,
+  shouldUseTaobao
 };

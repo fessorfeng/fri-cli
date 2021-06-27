@@ -11,6 +11,7 @@ const exec = require("@fri-cli/exec");
 const pkg = require(path.resolve(__dirname, "../package.json"));
 const CONST = require("./constant");
 const pkName = Object.keys(pkg.bin)[0];
+const { shouldUseTaobao } = require('@fri-cli/utils');
 
 async function cli() {
   try {
@@ -67,7 +68,7 @@ function registerCommand() {
 }
 
 // 准备工作
-async function prepare() {
+async function prepare () {
   // 检查cli版本号
   checkPackageVersion();
   // 检查Node版本号 放到 initCommand完成
@@ -80,6 +81,8 @@ async function prepare() {
   // checkInputArgs();
   // 检查环境变量
   checkEnv();
+  // 是否使用淘宝源
+  process.env.shouldUseTaobao = await shouldUseTaobao('npm');
   // 检查cli是否最新版本-》否提示更新
   await chekckGlobalUpdate();
 }
