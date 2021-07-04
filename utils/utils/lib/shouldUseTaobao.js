@@ -84,8 +84,10 @@ module.exports = async function shouldUseTaobao(command) {
       name: 'useTaobaoRegistry',
       type: 'confirm',
       message: chalk.yellow(
-        ` Your connection to the default ${command} registry seems to be slow.\n` +
-          `   Use ${chalk.cyan(registries.taobao)} for faster installation?`
+        // ` Your connection to the default ${command} registry seems to be slow.\n` +
+        // `   Use ${chalk.cyan(registries.taobao)} for faster installation?`您与默认源的连接似乎很慢。
+        ` 您与默认 ${command} registry 的连接似乎很慢。\n` +
+          `   是否使用 ${chalk.cyan(registries.taobao)} 加快安装?`
       ),
     },
   ]);

@@ -5,7 +5,6 @@ const semver = require("semver");
 const colors = require("colors/safe");
 const log = require('@fri-cli/log');
 
-
 class Command {
   constructor(_argv) {
     if (!_argv) {

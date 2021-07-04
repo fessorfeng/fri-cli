@@ -36,7 +36,10 @@ function registerCommand() {
     .command("init [project-name]")
     .description("project init")
     .option('-f, --force', '是否强制初始化项目')
-    .action(exec);
+    .action(async (...args) => {
+      await cmdPreAction();
+      exec(...args);
+    });
   
   program.on("option:debug", function () {
     process.env.LOG_LEVEL = "verbose";
@@ -60,7 +63,9 @@ function registerCommand() {
   });
   // console.log(process.argv, program.opts());
   // 如果没有参数和命令
-  program.parse(process.argv);
+  // program.parse(process.argv);
+  // 处理函数支持async，相应的，需要使用.parseAsync代替.parse。
+  program.parseAsync(process.argv);
 
   // 没有执行命令 提示program.args 只有命令，process.argv.slice(2)：命令+options
   if (!program.args || program.args.length < 1) {
@@ -82,9 +87,14 @@ async function prepare () {
   // checkInputArgs();
   // 检查环境变量
   checkEnv();
-  // 是否使用淘宝源
-  await useTaobaoRegistry();
+  // 是否使用淘宝源 
+  // await useTaobaoRegistry();
   // 检查cli是否最新版本-》否提示更新
+  // await chekckGlobalUpdate();
+}
+
+async function cmdPreAction () {
+  await useTaobaoRegistry();
   await chekckGlobalUpdate();
 }
 
@@ -135,7 +145,7 @@ function checkEnv() {
 }
 
 async function chekckGlobalUpdate() {
-  log.info(pkg.version);
+  // log.info(pkg.version);
   const versions = await getNpmSemverVersions(pkg.name, pkg.version);
   if (versions && versions.length) {
     log.warn(
