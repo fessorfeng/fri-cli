@@ -1,6 +1,6 @@
 {
   "name": "@fri-cli/command",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "fri-cli command",
   "keywords": [
     "fri-cli",
