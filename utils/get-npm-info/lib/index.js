@@ -17,7 +17,10 @@ function getNpmInfo(npmName, isOriginalRegistry = false) {
   });
 }
 
-function getRegistryUrl(isOriginal = false) {
+function getRegistryUrl (isOriginal = false) {
+  if (process.env.shouldUseTaobao) {
+    return "https://registry.npm.taobao.org";
+  }
   return isOriginal
     ? "http://registry.npmjs.org"
     : "https://registry.npm.taobao.org";

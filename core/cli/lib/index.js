@@ -37,12 +37,13 @@ function registerCommand() {
     .description("project init")
     .option('-f, --force', '是否强制初始化项目')
     .action(exec);
-
+  
   program.on("option:debug", function () {
     process.env.LOG_LEVEL = "verbose";
     log.level = process.env.LOG_LEVEL;
   });
 
+  // 放在command写不行 一定要现在这样
   program.on("option:target_path", function (val) {
     process.env.targetPath = val;
   });
@@ -69,7 +70,7 @@ function registerCommand() {
 
 // 准备工作
 async function prepare () {
-  // 检查cli版本号
+  // 检查cli版本号 输出本地版本号
   checkPackageVersion();
   // 检查Node版本号 放到 initCommand完成
   // checkNodeVersion();
@@ -82,9 +83,19 @@ async function prepare () {
   // 检查环境变量
   checkEnv();
   // 是否使用淘宝源
-  process.env.shouldUseTaobao = await shouldUseTaobao('npm');
+  await useTaobaoRegistry();
   // 检查cli是否最新版本-》否提示更新
   await chekckGlobalUpdate();
+}
+
+async function useTaobaoRegistry () {
+  const useTaobao = await shouldUseTaobao();
+  process.env.shouldUseTaobao = useTaobao;
+  if (useTaobao) {
+    const registry = 'https://registry.npm.taobao.org';
+    process.env.npm_config_registry = registry;
+    process.env.YARN_NPM_REGISTRY_SERVER = registry;
+  }
 }
 
 function checkPackageVersion() {

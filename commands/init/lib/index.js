@@ -12,7 +12,7 @@ const Command = require('@fri-cli/command');
 const Package = require('@fri-cli/package');
 const log = require('@fri-cli/log');
 const request = require('@fri-cli/request');
-const { cliSpinner, sleep, execPromise } = require('@fri-cli/utils');
+const { cliSpinner, sleep, execPromise, hasYarn } = require('@fri-cli/utils');
 
 const INIT_TYPE_PROJECT = 'project';
 const INIT_TYPE_COMPONENT = 'component';
@@ -127,7 +127,7 @@ class initCommand extends Command {
         "initType": "project",
         "ignore": ["**/public/**", "**/assets/**"],
         "type": "normal",
-        "installCommand": "npm install --registry=https://registry.npm.taobao.org",
+        "installCommand":   hasYarn() ? 'yarn' : "npm install",
         "startCommand": "npm run serve"
       },
       {
