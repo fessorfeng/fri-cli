@@ -12,7 +12,7 @@ const Command = require('@fri-cli/command');
 const Package = require('@fri-cli/package');
 const log = require('@fri-cli/log');
 const request = require('@fri-cli/request');
-const { cliSpinner, sleep, execPromise, hasYarn } = require('@fri-cli/utils');
+const { cliSpinner, sleep, execPromise, hasYarn, validVersion } = require('@fri-cli/utils');
 
 const INIT_TYPE_PROJECT = 'project';
 const INIT_TYPE_COMPONENT = 'component';
@@ -70,7 +70,9 @@ class initCommand extends Command {
       if (!confirmClear) return;
       // console.log("no ", confirmClear);
       // 清空
+      let spinner= cliSpinner('删除文件中...');
       fsExtra.emptyDirSync(localPath);
+      spinner.stop(true);
     }
     // 返回项目初始化信息
     return await this.getProjectInfo();
@@ -180,6 +182,10 @@ class initCommand extends Command {
         default: '1.0.0',
         validate: function (input) {
           var done = this.async();
+          if (!validVersion(input)) {
+            done('版本号有误，请重新输入！');
+            return;
+          }
           done(null, true);
         },
       },

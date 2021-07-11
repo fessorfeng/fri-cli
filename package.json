@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "fri-cli",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pb": "lerna publish",
+    "prepb": "npm config set registry https://registry.npmjs.org/ && npm login --registry http://registry.npmjs.org"
   },
   "keywords": [],
   "author": "",

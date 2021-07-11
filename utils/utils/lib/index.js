@@ -2,6 +2,7 @@
 
 const path = require('path');
 const Spinner = require('cli-spinner').Spinner;
+const semver = require('semver');
 
 function formatPath(p) {
   if (p && typeof p === 'string') {
@@ -47,6 +48,11 @@ function execPromise (command = '', args = [], options = {}) {
   });
 }
 
+// 返回null 无效
+function validVersion (version) {
+  return semver.valid(version);
+}
+
 const { hasYarn } = require('./aboutYarn');
 const { registries } = require('./registries');
 const shouldUseTaobao = require('./shouldUseTaobao');
@@ -59,5 +65,6 @@ module.exports = {
   execPromise,
   hasYarn,
   registries,
-  shouldUseTaobao
+  shouldUseTaobao,
+  validVersion
 };
